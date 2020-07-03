@@ -107,7 +107,7 @@ class Imdb(Dataset):
         embedding_matrix = embObj.readEmb()
         print("Creating model...")
         mod = CreateModel(200, 100)
-        model = mod.my_model(embedding_matrix, 1)
+        model = mod.existing_model(embedding_matrix, 1)
         #model = mod.existing_model(embedding_matrix, 1)
         print("Training model...")
         train = TrainModel(128, 50)
@@ -151,25 +151,16 @@ class Imdb(Dataset):
         print("Predicting for Fasttext...")
         results = PredictModel(choice=self.choice, model=MODEL['fasttext'])
         predictions = results.prepModel(test_samples_tokens_pad)
-        if self.output == 1:
-            results.resultsSingleClass(predictions, tes_sen)
-        else:
-            results.resultsMultiClass(predictions, tes_sen)
+        results.resultsSingleClass(predictions, tes_sen)
 
         print("Predicting for W2v...")
         results = PredictModel(choice=self.choice, model=MODEL['w2v'])
         predictions = results.prepModel(test_samples_tokens_pad)
-        if self.output == 1:
-            results.resultsSingleClass(predictions, tes_sen)
-        else:
-            results.resultsMultiClass(predictions, tes_sen)
+        results.resultsSingleClass(predictions, tes_sen)
 
         print("Predicting for Glove...")
         results = PredictModel(choice=self.choice, model=MODEL['glove'])
         predictions = results.prepModel(test_samples_tokens_pad)
-        if self.output == 1:
-            results.resultsSingleClass(predictions, tes_sen)
-        else:
-            results.resultsMultiClass(predictions, tes_sen)
+        results.resultsSingleClass(predictions, tes_sen)
 
 
